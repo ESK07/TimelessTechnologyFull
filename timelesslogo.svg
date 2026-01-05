@@ -1,0 +1,44 @@
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap');
+
+    .logo-box {
+      fill: #4A4A4A; /* Dark Gray */
+    }
+
+    .logo-box-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 130px; /* Adjust size of T */
+      fill: white;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .logo-text-line1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 85px; /* Adjust size of TIMELESS */
+      fill: #4A4A4A; /* Dark Gray */
+      letter-spacing: 1px;
+      transform: scaleY(1.1); /* Makes the font taller/narrower */
+    }
+
+    .logo-text-line2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 70px; /* Adjust size of TECHNOLOGY */
+      fill: #4A4A4A; /* Dark Gray */
+      letter-spacing: 1.5px;
+      transform: scaleY(1.1);
+    }
+  </style>
+
+  <rect x="0" y="0" width="100" height="200" class="logo-box"/>
+  <text x="50" y="95" class="logo-box-text">T</text>
+
+  <text x="130" y="75" class="logo-text-line1">TIMELESS</text>
+
+  <text x="130" y="155" class="logo-text-line2">TECHNOLOGY</text>
+
+</svg>
