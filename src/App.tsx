@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -7,26 +8,44 @@ import InternetServices from './pages/InternetServices.tsx';
 import CloudServices from "./pages/CloudServices";
 import Connectivity from "./pages/Connectivity";
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import ContactCenterSolutions from "./pages/ContactCenterSolutions";
+
+const PageTransition = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -12 }}
+    transition={{ duration: 0.25, ease: 'easeOut' }}
+  >
+    {children}
+  </motion.div>
+);
+
+const AppRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/internet-services" element={<PageTransition><InternetServices /></PageTransition>} />
+        <Route path="/cloud-services" element={<PageTransition><CloudServices /></PageTransition>} />
+        <Route path="/connectivity" element={<PageTransition><Connectivity /></PageTransition>} />
+        <Route path="/contact-center-solutions" element={<PageTransition><ContactCenterSolutions /></PageTransition>} /> 
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/internet-services" element={<InternetServices />} />
-          <Route path="/cloud-services" element={<CloudServices />} />
-          <Route path="/connectivity" element={<Connectivity />} />
-          <Route path="/contact-center-solutions" element={<ContactCenterSolutions />} /> 
-        </Routes>
+        <AppRoutes />
         <Footer />
       </div>
     </Router>

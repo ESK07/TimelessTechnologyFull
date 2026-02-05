@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Wifi,
   Satellite,
   Radio,
   CheckCircle,
@@ -25,9 +24,9 @@ const Connectivity = () => {
     },
     {
       icon: <Satellite className="w-8 h-8" />,
-      title: "VSAT (Very Small Aperture Terminal)",
+      title: "Satelite",
       description:
-        "VSAT uses satellite communication for reliable data transmission anywhere with line-of-sight to the satellite.",
+        "Satellite communication for reliable data transmission anywhere with line-of-sight to the satellite.",
       features: [
         "Global connectivity",
         "Works anywhere with satellite LoS",
@@ -38,16 +37,16 @@ const Connectivity = () => {
   ];
 
   const technologies = [
-    "Microwave Radios",
+   "Fiber Backhaul",
     "Satellite Systems",
-    "Fiber Backhaul",
     "Point-to-Point Links",
     "Point-to-Multipoint Systems",
-    "Network Monitoring Tools"
+    "Network Monitoring Tools",
+    "Microwave Radios"
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
@@ -62,14 +61,14 @@ const Connectivity = () => {
       </section>
 
       {/* Connectivity Options */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Our Connectivity Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Reliable and scalable solutions tailored to your communication needs.
             </p>
           </div>
@@ -78,13 +77,13 @@ const Connectivity = () => {
             {connectivityOptions.map((item, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-green-200 hover:shadow-2xl transition-all duration-500 group"
+                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-600 hover:shadow-2xl transition-all duration-500 group"
               >
-                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6 group-hover:bg-green-600 group-hover:text-white transition duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-2xl mb-6 group-hover:bg-green-600 group-hover:text-white transition duration-300">
                   {item.icon}
                 </div>
 
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
                   {item.title}
                 </h3>
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function InternetServices() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 py-12 px-6 md:px-20">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-12 px-6 md:px-20 transition-colors duration-200">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

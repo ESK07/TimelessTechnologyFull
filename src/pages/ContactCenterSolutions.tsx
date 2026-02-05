@@ -9,7 +9,7 @@ const fadeUp = {
 
 export default function ServicesAndConnectivityPage() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 py-12 px-6 md:px-20">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-12 px-6 md:px-20 transition-colors duration-200">
       <motion.div
         initial="hidden"
         animate="visible"

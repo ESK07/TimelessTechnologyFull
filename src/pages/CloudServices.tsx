@@ -108,12 +108,12 @@ const CloudServices = () => {
   ];
 
   return (
-    <div className="relative bg-gray-50 text-gray-800 pt-28 pb-20 overflow-hidden">
+    <div className="relative bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 pt-28 pb-20 overflow-hidden transition-colors duration-200">
       {/* Background Decorations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-green-100 via-transparent to-transparent opacity-70"></div>
+        <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-green-100 dark:from-green-900 via-transparent to-transparent opacity-70 dark:opacity-30"></div>
         <svg
-          className="absolute bottom-0 left-0 w-full text-green-100 opacity-40"
+          className="absolute bottom-0 left-0 w-full text-green-100 dark:text-green-900 opacity-40 dark:opacity-20"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -134,10 +134,10 @@ const CloudServices = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="text-4xl font-bold text-green-700 mb-4">
+          <h1 className="text-4xl font-bold text-green-700 dark:text-green-400 mb-4">
             CLOUD SERVICES
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
             With strategic partnerships across multiple cloud service providers,
             our cloud services provide a rich experience for our enterprise
             customers, guaranteeing a productive environment for both your

@@ -97,7 +97,7 @@ const UnifiedServices = () => {
   
  
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
 
       {/* HERO SECTION */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
@@ -112,14 +112,14 @@ const UnifiedServices = () => {
       </section>
 
       {/* MAIN SERVICES */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
               Professional Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               From cloud to mobile apps, we provide a full suite of digital services.
             </p>
           </div>
@@ -128,28 +128,28 @@ const UnifiedServices = () => {
             {services.map((service, index) => (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg border hover:border-green-200 hover:shadow-2xl transition"
+                className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-600 hover:shadow-2xl transition"
               >
-                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-2xl mb-6">
                   {service.icon}
                 </div>
 
-                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
+                <h3 className="text-xl font-bold mb-4 dark:text-white">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{service.description}</p>
 
                 <ul className="space-y-3 mb-6">
                   {service.features.map((f, i) => (
-                    <li key={i} className="flex items-center text-gray-700">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                    <li key={i} className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="w-5 h-5 text-green-500 dark:text-green-400 mr-3" />
                       {f}
                     </li>
                   ))}
                 </ul>
 
                 <div className="flex items-center justify-between mt-auto">
-                  <span className="text-xl font-bold text-green-600">{service.price}</span>
+                  <span className="text-xl font-bold text-green-600 dark:text-green-400">{service.price}</span>
                   {service.link ? (
-                    <Link to={service.link} className="flex items-center text-green-600 hover:text-green-700">
+                    <Link to={service.link} className="flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
                       Learn More <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   ) : (
@@ -166,14 +166,14 @@ const UnifiedServices = () => {
       </section>
 
       {/* CONNECTIVITY SOLUTIONS */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
               Connectivity Solutions
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Powerful communication technologies to keep you connected anywhere.
             </p>
           </div>
@@ -182,19 +182,19 @@ const UnifiedServices = () => {
             {connectivity.map((item, index) => (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg border hover:border-green-200 hover:shadow-2xl transition"
+                className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-600 hover:shadow-2xl transition"
               >
-                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-2xl mb-6">
                   {item.icon}
                 </div>
 
-                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                <p className="text-gray-600 mb-6">{item.description}</p>
+                <h3 className="text-2xl font-bold mb-4 dark:text-white">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{item.description}</p>
 
                 <ul className="space-y-3">
                   {item.features.map((f, i) => (
-                    <li key={i} className="flex items-center text-gray-700">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                    <li key={i} className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="w-5 h-5 text-green-500 dark:text-green-400 mr-3" />
                       {f}
                     </li>
                   ))}
@@ -208,18 +208,18 @@ const UnifiedServices = () => {
 {/* Contact Center Solutions Section (Your Added Code) */}
         <motion.div
           variants={fadeUp}
-          className="bg-white p-10 rounded-2xl shadow-lg"
+          className="bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-lg transition-colors duration-200"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 text-green-800">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 text-green-800 dark:text-green-400">
             Customer-Centric Digital Solutions
           </h1>
-          <p className="text-center text-lg text-gray-600 mb-10">
+          <p className="text-center text-lg text-gray-600 dark:text-gray-300 mb-10">
             Our digital offers start from the needs and wants of you, our customer. As technology advances and users evolve, we tailor our service scope to meet the complex demands of businesses and users.
           </p>
 
-          <div className="bg-gray-50 p-8 rounded-lg shadow-inner">
-            <h2 className="text-2xl font-semibold text-green-700 mb-4">Evolving with Technology</h2>
-            <p className="text-gray-700">
+          <div className="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg shadow-inner">
+            <h2 className="text-2xl font-semibold text-green-700 dark:text-green-400 mb-4">Evolving with Technology</h2>
+            <p className="text-gray-700 dark:text-gray-300">
               As a digital company, we are always evolving and adapting as technology evolves. Our evolution is driven by skilled and experienced personnel committed to delivering solutions that are not only current but also future-proof.
             </p>
           </div>
