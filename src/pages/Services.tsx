@@ -23,44 +23,42 @@ const UnifiedServices = () => {
       title: 'Internet Services',
       description: 'We provide high-quality internet access for businesses and homes, ensuring reliability and speed to support modern digital needs.',
       features: ['Fibre Optic Cable', 'Shared Internet Access', 'Network Design', 'Starlink Installation'],
-      price: 'From $150',
       link: '/InternetServices'
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
       title: 'Mobile App Development',
       description: 'Native and cross-platform applications for iOS and Android, built for performance and scalability.',
-      features: ['React Native', 'Flutter', 'Native Development', 'App Store Deployment'],
-      price: 'From $500'
+      features: ['React Native', 'Flutter', 'Native Development', 'App Store Deployment']
     },
     {
       icon: <Cloud className="w-8 h-8" />,
       title: 'Cloud Services',
       description: 'Cloud solutions that empower your business with productivity, scalability, and collaboration tools.',
       features: ['AWS/Azure Setup', 'Cloud Migration', 'Microsoft 365', 'Monitoring & Analytics'],
-      price: 'From $65',
+      
       link: '/CloudServices'
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: 'Cybersecurity',
       description: 'Protect your digital assets with robust security tools and defensive strategies.',
-      features: ['Security Audits', 'Penetration Testing', 'Compliance', 'Sophos & Fortinet'],
-      price: 'From $1,000'
+      features: ['Security Audits', 'Penetration Testing', 'Compliance', 'Sophos & Fortinet']
+      
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: 'Data Analytics',
       description: 'Turn raw data into meaningful insights using advanced analytics and visualization.',
       features: ['BI Dashboards', 'Machine Learning', 'Data Visualization', 'Predictive Analytics'],
-      price: 'From $500'
+      
     },
     {
       icon: <Wifi className="w-8 h-8" />,
       title: 'IoT Solutions',
       description: 'Smart solutions for homes and businesses leveraging IoT technology.',
       features: ['Automation', 'Real-time Monitoring', 'Device Integration', 'Edge Computing'],
-      price: 'From $800'
+      
     }
   ];
 
