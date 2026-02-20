@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Check } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { fadeUp, staggerContainer } from '../utils/animations';
 
@@ -177,78 +177,206 @@ const Contact = () => {
           </motion.div>
 
           {/* Contact Form Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="space-y-8">
 
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
-                Let's Start a Conversation
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                Whether you have a specific project in mind or just want to explore possibilities,
-                we're here to help. Fill out the form and we'll get back to you.
-              </p>
-            </div>
+  {/* Heading */}
+  <div>
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      Let's Start a Conversation
+    </h2>
+
+    <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+      Whether you have a specific project in mind or just want to explore possibilities,
+      we're here to help. Fill out the form and we'll get back to you with a detailed proposal.
+    </p>
+  </div>
+
+  {/* Feature Points */}
+  <div className="space-y-6">
+
+    <div className="flex items-start space-x-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
+        <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900 dark:text-white">
+          Free Consultation
+        </h4>
+        <p className="text-gray-600 dark:text-gray-400 text-sm">
+          Initial project assessment at no cost
+        </p>
+      </div>
+    </div>
+
+    <div className="flex items-start space-x-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
+        <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900 dark:text-white">
+          Detailed Proposal
+        </h4>
+        <p className="text-gray-600 dark:text-gray-400 text-sm">
+          Comprehensive project plan and timeline
+        </p>
+      </div>
+    </div>
+
+    <div className="flex items-start space-x-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
+        <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900 dark:text-white">
+          Transparent Pricing
+        </h4>
+        <p className="text-gray-600 dark:text-gray-400 text-sm">
+          Clear breakdown of costs and deliverables
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
             <div className="bg-white dark:bg-gray-800 border border-green-200 dark:border-gray-700 rounded-xl p-8 shadow-lg">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
 
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Full Name *"
-                  className="w-full border rounded-lg px-4 py-3"
-                />
+{/* Row 1 */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Full Name *
+    </label>
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleChange}
+      required
+      placeholder="Ephraim Kunaka"
+      className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+    />
+  </div>
 
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Email Address *"
-                  className="w-full border rounded-lg px-4 py-3"
-                />
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Email Address *
+    </label>
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleChange}
+      required
+      placeholder="esk@example.com"
+      className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+    />
+  </div>
+</div>
 
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  placeholder="Project Details *"
-                  className="w-full border rounded-lg px-4 py-3"
-                />
+{/* Row 2 */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Company Name
+    </label>
+    <input
+      type="text"
+      name="company"
+      value={formData.company}
+      onChange={handleChange}
+      placeholder="Your Company"
+      className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+    />
+  </div>
 
-                <motion.button
-                  type="submit"
-                  disabled={isLoading}
-                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
-                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
-                  transition={{ duration: 0.2 }}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Service Interested In *
+    </label>
+    <select
+      name="service"
+      value={formData.service}
+      onChange={handleChange}
+      required
+      className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+    >
+      <option value="">Select a service</option>
+      <option value="web">Web Development</option>
+      <option value="mobile">IP PBX Solutions</option>
+      <option value="cloud">Cloud Solutions</option>
+      <option value="ai">Internet solutions</option>
+      <option value="database">Database Solutions</option>
+      <option value="security">Cybersecurity</option>
+    </select>
+  </div>
+</div>
 
-                  className={`w-full py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 ${
-                    isLoading
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-green-600 hover:bg-green-700 text-white'
-                  }`}
-                >
-                  {isLoading ? (
-                    <span>Sending...</span>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <Send className="h-5 w-5" />
-                    </>
-                  )}
-                </motion.button>
+{/* Budget */}
+<div>
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    Project Budget
+  </label>
+  <select
+    name="budget"
+    value={formData.budget}
+    onChange={handleChange}
+    className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+  >
+    <option value="">Select budget range</option>
+    <option value="under-5k">Under $5,000</option>
+    <option value="5k-15k">$5,000 - $15,000</option>
+    <option value="15k-50k">$15,000 - $50,000</option>
+    <option value="50k-plus">$50,000+</option>
+    <option value="discuss">Let's discuss</option>
+  </select>
+</div>
 
-              </form>
+{/* Message */}
+<div>
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    Project Details *
+  </label>
+  <textarea
+    name="message"
+    value={formData.message}
+    onChange={handleChange}
+    required
+    rows={6}
+    placeholder="Tell us about your project, goals, and any specific requirements..."
+    className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
+  />
+</div>
+
+{/* Submit Button */}
+<motion.button
+  type="submit"
+  disabled={isLoading}
+  whileHover={{ scale: isLoading ? 1 : 1.02 }}
+  whileTap={{ scale: isLoading ? 1 : 0.98 }}
+  transition={{ duration: 0.2 }}
+  className={`w-full py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
+    isLoading
+      ? 'bg-gray-400 cursor-not-allowed'
+      : 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white'
+  }`}
+>
+  {isLoading ? (
+    <span>Sending...</span>
+  ) : (
+    <>
+      <span>Send Message</span>
+      <Send className="h-5 w-5" />
+    </>
+  )}
+</motion.button>
+
+</form>
+
             </div>
 
-          </div>
         </div>
       </section>
     </div>
