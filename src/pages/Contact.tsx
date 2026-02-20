@@ -26,14 +26,14 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAIL_SERVICE_ID,
-        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+        import.meta.env.VITE_EMAIL_SERVICE_ID as string,
+        import.meta.env.VITE_EMAIL_TEMPLATE_ID as string,
         {
           name: formData.name,
           email: formData.email,
@@ -42,10 +42,14 @@ const Contact = () => {
           budget: formData.budget,
           message: formData.message,
         },
-        import.meta.env.VITE_EMAIL_PUBLIC_KEY
+        import.meta.env.VITE_EMAIL_PUBLIC_KEY as string
       );
 
       setIsSubmitted(true);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
 
       setFormData({
         name: '',
@@ -124,138 +128,126 @@ const Contact = () => {
 
   return (
     <div className="pt-16">
-      <section className="py-20 bg-gradient-to-br from-green-600 via-emerald-500 to-green-700 text-center text-white">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">Get In Touch</h1>
-        <p className="text-xl md:text-2xl max-w-4xl mx-auto">
-          Ready to start your next project? We'd love to hear from you.
-        </p>
+
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-green-600 via-emerald-500 to-green-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            Get In Touch
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Ready to start your next project? We'd love to hear from you and discuss how we can help.
+          </p>
+        </div>
       </section>
 
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4">
+      {/* Contact Section */}
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Contact Cards */}
+          {/* Contact Info Cards */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
           >
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
                 variants={fadeUp}
-                whileHover={{ scale: 1.05 }}
-                className="bg-green-50 dark:bg-gray-800 border rounded-xl p-8 text-center shadow-lg"
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-green-50 dark:bg-gray-800 backdrop-blur-sm border border-green-200 dark:border-gray-700 rounded-xl p-8 text-center hover:bg-green-100 dark:hover:bg-gray-700 transition-all duration-300 group shadow-lg hover:shadow-xl"
               >
-                <div className="mb-6 flex justify-center">
+                <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform duration-300">
                   {info.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{info.title}</h3>
-                <p className="font-medium mb-2">{info.details}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  {info.title}
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 font-medium mb-2">
+                  {info.details}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   {info.subdescription}
                 </p>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Form */}
-          <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 border rounded-xl p-8 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Form Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name *"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              />
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+                Let's Start a Conversation
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                Whether you have a specific project in mind or just want to explore possibilities,
+                we're here to help. Fill out the form and we'll get back to you.
+              </p>
+            </div>
 
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address *"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              />
+            <div className="bg-white dark:bg-gray-800 border border-green-200 dark:border-gray-700 rounded-xl p-8 shadow-lg">
+              <form onSubmit={handleSubmit} className="space-y-6">
 
-              <input
-                type="text"
-                name="company"
-                placeholder="Company Name"
-                value={formData.company}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-4 py-3"
-              />
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Full Name *"
+                  className="w-full border rounded-lg px-4 py-3"
+                />
 
-              <select
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              >
-                <option value="">Select Service *</option>
-                <option value="web">Web Development</option>
-                <option value="mobile">Mobile Applications</option>
-                <option value="cloud">Cloud Solutions</option>
-                <option value="ai">AI Integration</option>
-                <option value="database">Database Solutions</option>
-                <option value="security">Cybersecurity</option>
-              </select>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="Email Address *"
+                  className="w-full border rounded-lg px-4 py-3"
+                />
 
-              <select
-                name="budget"
-                value={formData.budget}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-4 py-3"
-              >
-                <option value="">Select Budget</option>
-                <option value="under-5k">Under $5,000</option>
-                <option value="5k-15k">$5,000 - $15,000</option>
-                <option value="15k-50k">$15,000 - $50,000</option>
-                <option value="50k-plus">$50,000+</option>
-                <option value="discuss">Let's discuss</option>
-              </select>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  placeholder="Project Details *"
+                  className="w-full border rounded-lg px-4 py-3"
+                />
 
-              <textarea
-                name="message"
-                rows={6}
-                placeholder="Project Details *"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              />
+                <motion.button
+                  type="submit"
+                  disabled={isLoading}
+                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                  transition={{ duration: 0.2 }}
 
-              <motion.button
-                type="submit"
-                disabled={isLoading}
-                whileHover={{ scale: isLoading ? 1 : 1.02 }}
-                whileTap={{ scale: isLoading ? 1 : 0.98 }}
-                className={`w-full py-4 rounded-lg font-semibold transition-all flex items-center justify-center space-x-2 ${
-                  isLoading
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-green-600 hover:bg-green-700 text-white'
-                }`}
-              >
-                {isLoading ? (
-                  <span>Sending...</span>
-                ) : (
-                  <>
-                    <span>Send Message</span>
-                    <Send className="h-5 w-5" />
-                  </>
-                )}
-              </motion.button>
+                  className={`w-full py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 ${
+                    isLoading
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-green-600 hover:bg-green-700 text-white'
+                  }`}
+                >
+                  {isLoading ? (
+                    <span>Sending...</span>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send className="h-5 w-5" />
+                    </>
+                  )}
+                </motion.button>
 
-            </form>
+              </form>
+            </div>
+
           </div>
         </div>
       </section>
