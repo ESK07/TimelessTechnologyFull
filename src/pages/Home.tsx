@@ -90,8 +90,10 @@ const Home = () => {
             transition={{ duration: 0.65, ease: 'easeOut', delay: 0.05 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            We create innovative digital solutions that empower businesses to thrive in the modern world.
-            Our digital offers start from the needs and wants of you, our customer. As technology advances and users evolve, we tailor our service scope to meet the complex demands of businesses and users. We strive to ensure that our solutions are developed to fit into your current ways of working, so, you need not to change how you work in order to employ the system.
+            We design innovative digital solutions that empower businesses to thrive in a fast-changing world. 
+            Every offering begins with your needs and aspirations at the center. 
+            As technology evolves and user expectations grow, we adapt our services to meet complex demands with precision. 
+            Our solutions are built to integrate effortlessly into your current ways of working—so you can unlock new opportunities without disrupting what already makes you successful.
           </motion.p>
           <motion.div
             variants={fadeUp}
