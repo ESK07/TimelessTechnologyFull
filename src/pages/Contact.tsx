@@ -8,6 +8,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
     service: "",
     budget: "",
@@ -38,7 +39,11 @@ export default function Contact() {
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       newErrors.email = "Enter a valid email address";
     }
-
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^[0-9+\-\s()]{7,15}$/.test(formData.phone)) {
+      newErrors.phone = "Enter a valid phone number";
+    }
     if (!formData.service) {
       newErrors.service = "Please select a service";
     }
@@ -71,11 +76,12 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        toast.success("Message sent successfully 🚀");
+        toast.success("Message sent successfully ");
 
         setFormData({
           name: "",
           email: "",
+          phone: "",
           company: "",
           service: "",
           budget: "",
@@ -101,6 +107,7 @@ export default function Contact() {
         <form name="contact" data-netlify="true" hidden>
           <input type="text" name="name" />
           <input type="email" name="email" />
+          <input type="text" name="phone" />
           <input type="text" name="company" />
           <input type="text" name="service" />
           <input type="text" name="budget" />
@@ -162,6 +169,14 @@ export default function Contact() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <Input
+                  label="Phone Number *"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  error={errors.phone}
+                />
+
+                <Input
                   label="Company Name"
                   name="company"
                   value={formData.company}
@@ -199,7 +214,7 @@ export default function Contact() {
                 disabled={isLoading}
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition font-medium"
               >
-                {isLoading ? "Sending..." : "Send Message ✈️"}
+                {isLoading ? "Sending..." : "Send Message "}
               </button>
 
             </form>
