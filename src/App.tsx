@@ -10,6 +10,9 @@ import Connectivity from "./pages/Connectivity";
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import ContactCenterSolutions from "./pages/ContactCenterSolutions";
+import { Toaster } from "react-hot-toast";
+
+<Toaster position="top-right" />
 
 const PageTransition = ({ children }: { children: React.ReactNode }) => (
   <motion.div
