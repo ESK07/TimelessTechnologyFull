@@ -1,204 +1,239 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Check } from "lucide-react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { fadeUp, staggerContainer } from "../utils/animations";
+import { Mail, Phone, MapPin, Clock, CheckCircle } from "lucide-react";
 
-const Contact = () => {
+export default function Contact() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     service: "",
     budget: "",
-    message: ""
+    message: "",
   });
 
-  const [errors, setErrors] = useState<any>({});
-  const [inlineError, setInlineError] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Auto-dismiss inline error
-  useEffect(() => {
-    if (inlineError) {
-      const timer = setTimeout(() => setInlineError(""), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [inlineError]);
-
-  const validate = () => {
-    const newErrors: any = {};
-    if (!formData.name.trim()) newErrors.name = "Full name is required";
-    if (!formData.email.match(/^\S+@\S+\.\S+$/))
-      newErrors.email = "Valid email required";
-    if (!formData.service) newErrors.service = "Please select a service";
-    if (!formData.message.trim()) newErrors.message = "Project details required";
-    return newErrors;
-  };
-
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      toast.error("Please fix the highlighted fields.");
-      return;
-    }
-
     setIsLoading(true);
-    setErrors({});
+    setErrorMessage("");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          ...formData
-        }).toString()
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "YOUR_ACCESS_KEY_HERE",
+          ...formData,
+        }),
       });
 
-      if (!response.ok) throw new Error("Submission failed");
+      const data = await response.json();
 
-      toast.success("Message sent successfully 🚀");
-      setIsSubmitted(true);
+      if (data.success) {
+        toast.success("Message sent successfully 🚀");
 
-      setTimeout(() => setIsSubmitted(false), 3000);
-
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        service: "",
-        budget: "",
-        message: ""
-      });
-
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          service: "",
+          budget: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Submission failed");
+      }
     } catch (error) {
-      setInlineError("Something went wrong. Please try again.");
-      toast.error("Submission failed ❌");
+      setErrorMessage("Failed to send message. Please try again.");
+      toast.error("Something went wrong ❌");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="min-h-screen flex items-center justify-center"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 120 }}
-          className="text-center"
-        >
-          <CheckCircle className="h-20 w-20 text-green-500 mx-auto mb-6" />
-          <h2 className="text-4xl font-bold mb-4">Thank You!</h2>
-          <p>Your message has been sent successfully.</p>
-        </motion.div>
-      </motion.div>
-    );
-  }
-
   return (
-    <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      onSubmit={handleSubmit}
-      className="space-y-6"
-    >
-      {/* Required Hidden Inputs */}
-      <input type="hidden" name="form-name" value="contact" />
-      <input type="hidden" name="bot-field" />
+    <section className="bg-gray-50 py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Top Contact Cards */}
+        <div className="grid md:grid-cols-4 gap-6 mb-16">
+          <ContactCard
+            icon={<Mail className="text-green-600" />}
+            title="Email Us"
+            text="sales@timelesstechnology.co.zw"
+            sub="We'll respond within 24 hours"
+          />
+          <ContactCard
+            icon={<Phone className="text-green-600" />}
+            title="Call Us"
+            text="+263 867 722 2444"
+            sub="Monday to Friday, 8 AM - 5 PM"
+          />
+          <ContactCard
+            icon={<MapPin className="text-green-600" />}
+            title="Visit Us"
+            text="Avondale, Harare, Zimbabwe"
+            sub="Schedule an appointment"
+          />
+          <ContactCard
+            icon={<Clock className="text-green-600" />}
+            title="Business Hours"
+            text="Mon - Fri: 8 AM - 5 PM"
+            sub="Weekend support available"
+          />
+        </div>
 
-      {/* NAME */}
-      <div>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Full Name *"
-          className={`input ${errors.name ? "border-red-500" : ""}`}
-        />
-        {errors.name && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-500 text-sm">
-            {errors.name}
-          </motion.p>
-        )}
+        {/* Main Section */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          
+          {/* Left Side */}
+          <div>
+            <h2 className="text-4xl font-bold mb-6">
+              Let's Start a Conversation
+            </h2>
+
+            <p className="text-gray-600 mb-8">
+              Whether you have a specific project in mind or just want to explore possibilities,
+              we're here to help. Fill out the form and we'll get back to you
+              with a detailed proposal.
+            </p>
+
+            <Feature text="Free Consultation" sub="Initial project assessment at no cost" />
+            <Feature text="Detailed Proposal" sub="Comprehensive project plan and timeline" />
+            <Feature text="Transparent Pricing" sub="Clear breakdown of costs and deliverables" />
+          </div>
+
+          {/* Right Side Form */}
+          <div className="bg-white p-8 rounded-xl shadow-md border">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input label="Full Name *" name="name" value={formData.name} onChange={handleChange} />
+                <Input label="Email Address *" name="email" type="email" value={formData.email} onChange={handleChange} />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input label="Company Name" name="company" value={formData.company} onChange={handleChange} />
+
+                <Select
+                  label="Service Interested In *"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  options={["Web Development", "Internet Services", "Cloud Services", "Connectivity"]}
+                />
+              </div>
+
+              <Select
+                label="Project Budget"
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                options={["$1,000 - $5,000", "$5,000 - $10,000", "$10,000+"]}
+              />
+
+              <TextArea
+                label="Project Details *"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+              />
+
+              {errorMessage && (
+                <div className="bg-red-100 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {errorMessage}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition font-medium"
+              >
+                {isLoading ? "Sending..." : "Send Message ✈️"}
+              </button>
+
+            </form>
+          </div>
+
+        </div>
       </div>
-
-      {/* EMAIL */}
-      <div>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email *"
-          className={`input ${errors.email ? "border-red-500" : ""}`}
-        />
-        {errors.email && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-500 text-sm">
-            {errors.email}
-          </motion.p>
-        )}
-      </div>
-
-      {/* MESSAGE */}
-      <div>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Project Details *"
-          className={`input ${errors.message ? "border-red-500" : ""}`}
-        />
-        {errors.message && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-500 text-sm">
-            {errors.message}
-          </motion.p>
-        )}
-      </div>
-
-      {/* Animated Inline Error */}
-      <AnimatePresence>
-        {inlineError && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="bg-red-100 text-red-700 p-3 rounded-lg"
-          >
-            {inlineError}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.button
-        type="submit"
-        disabled={isLoading}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="bg-green-600 text-white py-3 rounded-lg w-full"
-      >
-        {isLoading ? "Sending..." : "Send Message"}
-      </motion.button>
-    </form>
+    </section>
   );
-};
+}
 
-export default Contact;
+/* ---------- Reusable Components ---------- */
+
+function ContactCard({ icon, title, text, sub }: any) {
+  return (
+    <div className="bg-green-50 p-6 rounded-xl border border-green-200 text-center shadow-sm">
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h4 className="font-semibold mb-2">{title}</h4>
+      <p className="text-gray-700 text-sm">{text}</p>
+      <p className="text-gray-500 text-xs mt-1">{sub}</p>
+    </div>
+  );
+}
+
+function Feature({ text, sub }: any) {
+  return (
+    <div className="flex items-start gap-3 mb-6">
+      <CheckCircle className="text-green-600 mt-1" size={20} />
+      <div>
+        <p className="font-semibold">{text}</p>
+        <p className="text-gray-500 text-sm">{sub}</p>
+      </div>
+    </div>
+  );
+}
+
+function Input({ label, ...props }: any) {
+  return (
+    <div>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      <input
+        {...props}
+        className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+      />
+    </div>
+  );
+}
+
+function Select({ label, options, ...props }: any) {
+  return (
+    <div>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      <select
+        {...props}
+        className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+      >
+        <option value="">Select option</option>
+        {options.map((opt: string) => (
+          <option key={opt}>{opt}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function TextArea({ label, ...props }: any) {
+  return (
+    <div>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      <textarea
+        {...props}
+        rows={4}
+        className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+      />
+    </div>
+  );
+}
