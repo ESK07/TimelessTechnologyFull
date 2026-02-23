@@ -45,11 +45,15 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <>
-      <Toaster position="top-right" />
-      {/* your routes */}
-    </>
-    
+    <Router>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+        <Toaster position="top-right" />
+        <Navbar />
+        <AppRoutes />
+        <Footer />
+      </div>
+      
+    </Router>
   );
 }
 
