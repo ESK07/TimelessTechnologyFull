@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Github, MessageCircle } from 'lucide-react';
+import {  Mail, Phone, MapPin, Facebook, X, Linkedin, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -22,19 +22,20 @@ const Footer = () => {
               Empowering businesses with innovative technology solutions that stand the test of time.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/share/17X9MnSi3g/" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+              <a 
+              href="https://www.facebook.com/share/17X9MnSi3g/" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a 
+              href="#" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <X className="h-5 w-5" />
               </a>
-              <a href="https://www.linkedin.com/company/timelesstechzw/" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+              <a 
+              href="https://www.linkedin.com/company/timelesstechzw/" className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="https://wa.me/263788511100"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="h-9 w-9 rounded-lg bg-background border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300 group btn-glow"
                 aria-label="WhatsApp"
               >
